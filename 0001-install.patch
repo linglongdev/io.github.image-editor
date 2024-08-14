@@ -1,0 +1,51 @@
+From 5ab8bd20c0c1cd7a9d4efa65ca993b1315375df4 Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Tue, 13 Aug 2024 13:38:00 +0800
+Subject: [PATCH] install
+
+---
+ CMakeLists.txt       | 10 +++++++++-
+ image_editor.desktop | 11 +++++++++++
+ 2 files changed, 20 insertions(+), 1 deletion(-)
+ create mode 100644 image_editor.desktop
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8e3a5a5..e6b8e84 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -76,4 +76,12 @@ target_link_libraries(${PROJECT_NAME} ${REQUIRED_LIBS_QUALIFIED})
+ #### add GTest
+ add_library(core ${BACKEND})
+ target_link_libraries(core ${REQUIRED_LIBS_QUALIFIED})
+-add_subdirectory(backend/test)
++install(TARGETS ${PROJECT_NAME}
++             DESTINATION bin)
++
++install(FILES frontend/resources/image_editor.png
++        DESTINATION share/icons)
++
++
++install(FILES image_editor.desktop
++            DESTINATION share/applications)
+\ No newline at end of file
+diff --git a/image_editor.desktop b/image_editor.desktop
+new file mode 100644
+index 0000000..8c207b7
+--- /dev/null
++++ b/image_editor.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=image;Qt;
++Exec=image_editor
++Name=image_editor
++Name[zh_CN]=image_editor
++Icon=image_editor
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=image_editor
++Version=1.0
+\ No newline at end of file
+-- 
+2.43.4
+
