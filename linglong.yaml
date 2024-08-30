@@ -1,0 +1,31 @@
+version: "1"
+
+package:
+  id: io.github.image-editor
+  name: image-editor
+  version: 1.0.0.1
+  kind: app
+  description: |
+    GUI Image-Editor written in C++ and Qt. Provides functionalities as Editing and Kernel convolution.
+
+command:
+  - /opt/apps/io.github.image-editor/files/bin/image_editor
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/Dartypier/image-editor.git
+    version: master
+    commit: 511f2ad0835977b39b38a0c6260fde96623e9f7a
+
+build: |
+  cd /project/linglong/sources/image-editor.git
+  git apply ../../../0001-install.patch
+  cp frontend/resources/icon.png  frontend/resources/image_editor.png
+  mkdir build
+  cd build
+  cmake .. \
+        -DCMAKE_INSTALL_PREFIX=${PREFIX}
+  cmake --build . --target install
